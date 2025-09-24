@@ -2,6 +2,17 @@
 var google;
 
 function init() {
+    // Vérifier si Google Maps est disponible
+    if (typeof google === 'undefined' || !google.maps) {
+        console.log('Google Maps API non disponible');
+        // Afficher un message d'erreur ou une carte de remplacement
+        var mapElement = document.getElementById('map');
+        if (mapElement) {
+            mapElement.innerHTML = '<div style="display: flex; align-items: center; justify-content: center; height: 100%; background: #f8f9fa; color: #6c757d; font-family: Arial, sans-serif;"><div style="text-align: center;"><h4>📍 Carte non disponible</h4><p>Veuillez configurer votre clé API Google Maps</p><p><strong>Adresse:</strong> 198 West 21th Street, San Francisco, CA</p><p><small>Pour activer la carte, obtenez une clé API gratuite sur <a href="https://console.cloud.google.com/" target="_blank">Google Cloud Console</a></small></p></div></div>';
+        }
+        return;
+    }
+
     // Basic options for a simple Google Map
     // For more options see: https://developers.google.com/maps/documentation/javascript/reference#MapOptions
     // var myLatlng = new google.maps.LatLng(40.71751, -73.990922);
@@ -112,7 +123,7 @@ function init() {
     var addresses = ['New York'];
 
     for (var x = 0; x < addresses.length; x++) {
-        $.getJSON('http://maps.googleapis.com/maps/api/geocode/json?address='+addresses[x]+'&sensor=false', null, function (data) {
+        $.getJSON('https://maps.googleapis.com/maps/api/geocode/json?address='+addresses[x]+'&sensor=false', null, function (data) {
             var p = data.results[0].geometry.location
             var latlng = new google.maps.LatLng(p.lat, p.lng);
             new google.maps.Marker({
