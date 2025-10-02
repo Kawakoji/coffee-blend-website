@@ -7281,6 +7281,26 @@ body {
     position: fixed;
     height: 100%;
     width: 100%; }
+  
+  /* Fix pour le scroll mobile */
+  @media (max-width: 991.98px) {
+    body.menu-show {
+      overflow: hidden;
+      position: fixed;
+      height: 100%;
+      width: 100%;
+    }
+  }
+  
+  /* S'assurer que le scroll fonctionne quand le menu n'est pas ouvert */
+  @media (max-width: 991.98px) {
+    body:not(.menu-show) {
+      overflow: auto !important;
+      position: relative !important;
+      height: auto !important;
+      width: auto !important;
+    }
+  }
 
 span {
   color: #bfbfbf; }

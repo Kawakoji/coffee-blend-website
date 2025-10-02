@@ -3,6 +3,29 @@
  	easing: 'slide'
  });
 
+ // Fix pour le scroll mobile - s'assurer que la classe menu-show est supprimée
+ $(document).ready(function() {
+   // Supprimer la classe menu-show au chargement de la page
+   $('body').removeClass('menu-show');
+   
+   // Gérer la fermeture du menu mobile
+   $('.navbar-toggler').on('click', function() {
+     var isExpanded = $(this).attr('aria-expanded') === 'true';
+     if (!isExpanded) {
+       // Menu se ferme
+       setTimeout(function() {
+         $('body').removeClass('menu-show');
+       }, 300);
+     }
+   });
+   
+   // Supprimer menu-show quand on clique sur un lien du menu
+   $('.navbar-nav .nav-link').on('click', function() {
+     $('body').removeClass('menu-show');
+     $('.navbar-collapse').removeClass('show');
+   });
+ });
+
 (function($) {
 
 	"use strict";
